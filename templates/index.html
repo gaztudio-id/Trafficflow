@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Traffic AI - Monitoring System</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap 5.3 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --primary-gradient: linear-gradient(135deg, #4361ee, #3f37c9);
+        --bg-light: #f8f9fd;
+        --text-dark: #1e293b;
+      }
+
+      body {
+        background: var(--bg-light);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        color: var(--text-dark);
+        min-height: 100vh;
+      }
+
+      /* Navbar Styling */
+      .navbar {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 1rem 0;
+      }
+
+      .navbar-brand {
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      /* Main Card */
+      .card-main {
+        border: none;
+        border-radius: 30px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        background: white;
+        overflow: hidden;
+        margin-top: 2rem;
+      }
+
+      /* Input Section */
+      .input-section {
+        padding: 40px;
+      }
+      .form-label {
+        font-weight: 700;
+        color: #64748b;
+        font-size: 0.85rem;
+        margin-bottom: 0.6rem;
+        text-transform: uppercase;
+      }
+
+      .input-group-custom {
+        background: #f1f5f9;
+        border-radius: 14px;
+        padding: 5px 15px;
+        display: flex;
+        align-items: center;
+        border: 2px solid transparent;
+        transition: all 0.3s;
+      }
+
+      .input-group-custom:focus-within {
+        border-color: #4361ee;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+      }
+
+      .input-group-custom i {
+        color: #94a3b8;
+        margin-right: 12px;
+      }
+      .input-group-custom input,
+      .input-group-custom select {
+        border: none;
+        background: transparent;
+        width: 100%;
+        padding: 10px 0;
+        font-weight: 600;
+        outline: none;
+      }
+
+      /* Result Section (The Blue Side) */
+      .result-section {
+        background: var(--primary-gradient);
+        padding: 40px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+      }
+
+      .volume-num {
+        font-size: 6rem;
+        font-weight: 800;
+        line-height: 1;
+        margin: 10px 0;
+      }
+
+      .status-badge {
+        padding: 12px 25px;
+        border-radius: 100px;
+        font-weight: 800;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .status-macet {
+        background: #ef4444;
+        color: white;
+      }
+      .status-padat {
+        background: #facc15;
+        color: #854d0e;
+      }
+      .status-lancar {
+        background: #22c55e;
+        color: white;
+      }
+
+      .analysis-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        border-radius: 20px;
+        padding: 20px;
+        margin-top: 30px;
+        width: 100%;
+        text-align: left;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .btn-predict {
+        background: var(--primary-gradient);
+        color: white;
+        border: none;
+        padding: 18px;
+        border-radius: 16px;
+        font-weight: 800;
+        width: 100%;
+        margin-top: 2rem;
+        transition: all 0.3s;
+        box-shadow: 0 10px 25px rgba(67, 97, 238, 0.2);
+      }
+
+      .btn-predict:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(67, 97, 238, 0.4);
+      }
+
+      .vehicle-box {
+        background: #f8fafc;
+        border-radius: 16px;
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #e2e8f0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar sticky-top">
+      <div class="container">
+        <a class="navbar-brand text-primary" href="#">
+          <i class="fas fa-traffic-light me-2"></i>TRAFFIC<span
+            class="text-dark"
+            >FLOW</span
+          >
+        </a>
+        <span
+          class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold"
+          >Machine Learning Project </span
+        >
+      </div>
+    </nav>
+
+    <div class="container mb-5">
+      <div class="card-main">
+        <div class="row g-0">
+          <!-- SISI INPUT -->
+          <div class="col-lg-7 input-section">
+            <div class="mb-4">
+              <h4 class="fw-extrabold mb-1">Parameter Input</h4>
+              <p class="text-muted small">
+                Data real-time untuk prediksi cerdas.
+              </p>
+            </div>
+
+            <form action="/predict" method="POST">
+              <div class="row g-4">
+                <div class="col-12">
+                  <label class="form-label">Waktu & Tanggal</label>
+                  <div class="input-group-custom">
+                    <i class="far fa-calendar-alt"></i>
+                    <input
+                      type="datetime-local"
+                      name="datetime"
+                      id="dt_input"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Row 3 Input Utama (Sama Bentuk) -->
+                <div class="col-md-4">
+                  <label class="form-label">Kecepatan</label>
+                  <div class="input-group-custom">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <input
+                      type="number"
+                      step="0.1"
+                      name="speed"
+                      placeholder="km/h"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Suhu</label>
+                  <div class="input-group-custom">
+                    <i class="fas fa-thermometer-half"></i>
+                    <input
+                      type="number"
+                      step="0.1"
+                      name="temp"
+                      placeholder="°C"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Lembap</label>
+                  <div class="input-group-custom">
+                    <i class="fas fa-tint"></i>
+                    <input
+                      type="number"
+                      name="humidity"
+                      placeholder="%"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Row Kendaraan -->
+                <div class="col-12">
+                  <div class="row g-3">
+                    <div class="col-4">
+                      <div class="vehicle-box">
+                        <label class="form-label mb-1">Mobil</label>
+                        <input
+                          type="number"
+                          name="cars"
+                          class="form-control border-0 bg-transparent text-center fw-bold"
+                          value="0"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="vehicle-box">
+                        <label class="form-label mb-1">Truk</label>
+                        <input
+                          type="number"
+                          name="trucks"
+                          class="form-control border-0 bg-transparent text-center fw-bold"
+                          value="0"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="vehicle-box">
+                        <label class="form-label mb-1">Motor</label>
+                        <input
+                          type="number"
+                          name="bikes"
+                          class="form-control border-0 bg-transparent text-center fw-bold"
+                          value="0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dropdowns -->
+                <div class="col-md-6">
+                  <label class="form-label">Kondisi Cuaca</label>
+                  <div class="input-group-custom">
+                    <i class="fas fa-cloud-sun"></i>
+                    <select name="weather">
+                      <option value="Sunny">Cerah</option>
+                      <option value="Rainy">Hujan</option>
+                      <option value="Foggy">Kabut</option>
+                      <option value="Windy">Berangin</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Lampu Lalin</label>
+                  <div class="input-group-custom">
+                    <i class="fas fa-traffic-light"></i>
+                    <select name="signal">
+                      <option value="Green">Hijau</option>
+                      <option value="Yellow">Kuning</option>
+                      <option value="Red">Merah</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-predict">
+                <i class="fas fa-brain me-2"></i> ANALISIS KEPADATAN
+              </button>
+            </form>
+          </div>
+
+          <!-- SISI HASIL -->
+          <div class="col-lg-5 result-section">
+            {% if prediction_text %}
+            <p
+              class="text-uppercase fw-bold opacity-75 mb-0"
+              style="letter-spacing: 2px"
+            >
+              Prediksi Volume
+            </p>
+            <div class="volume-num">{{ prediction_text }}</div>
+            <p class="fw-medium opacity-75 mb-4">Kendaraan / Menit</p>
+
+            <div
+              class="status-badge {% if 'Macet' in status_text %}status-macet {% elif 'Padat' in status_text %}status-padat {% else %}status-lancar{% endif %}"
+            >
+              <i class="fas fa-circle me-2"></i> {{ status_text }}
+            </div>
+
+            <!-- <div class="analysis-card">
+              <h6 class="fw-bold">
+                <i class="fas fa-robot me-2"></i>Insight AI:
+              </h6>
+              <p class="small mb-0 opacity-90">{{ analysis_note }}</p>
+            </div> -->
+
+            <a
+              href="/"
+              class="btn btn-link text-white text-decoration-none mt-4 small opacity-75 hover-opacity-100"
+            >
+              <i class="fas fa-redo-alt me-2"></i>Reset Parameter
+            </a>
+            {% else %}
+            <div class="text-center py-5">
+              <i class="fas fa-chart-area fa-5x mb-4 opacity-20"></i>
+              <h5 class="fw-bold">Menunggu Input</h5>
+              <p class="small opacity-60 px-4">
+                Lengkapi data di sisi kiri untuk memulai kalkulasi beban lalu
+                lintas.
+              </p>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Auto set time
+      window.onload = function () {
+        const dt = document.getElementById("dt_input");
+        if (!dt.value) {
+          const now = new Date();
+          now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+          dt.value = now.toISOString().slice(0, 16);
+        }
+      };
+    </script>
+  </body>
+</html>
