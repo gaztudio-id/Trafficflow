@@ -8,7 +8,7 @@ TrafficFlow adalah aplikasi cerdas yang dirancang untuk menganalisis beban lalu 
 ## ⚙️ Alur Pengembangan (Technical Pipeline)
 
 ### 1. Analisis & Pembersihan Data
-- Mengolah dataset *Smart Traffic Indonesia*
+- Mengolah dataset *Smart Traffic*
 - Menangani missing values
 - Ekstraksi fitur waktu (hour, day_of_week)
 
