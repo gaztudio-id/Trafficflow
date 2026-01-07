@@ -61,7 +61,7 @@ Berikut adalah susunan folder dan file dalam proyek ini:
 Traffic_App/
 ├── app.py                  # Aplikasi utama Flask (Backend & Route)
 ├── requirements.txt        # Daftar dependensi Python
-├── Procfile                # Instruksi deployment (untuk Heroku/Render)
+
 ├── traffic_model_final.pkl # Model Random Forest yang sudah dilatih
 ├── scaler.pkl              # Scaler untuk normalisasi data input
 ├── templates/              # Folder file HTML
@@ -121,14 +121,7 @@ Untuk hasil prediksi yang akurat, pengguna disarankan memahami variabel input:
 3.  Gulir ke bawah ke bagian **"Contoh Skenario Lengkap"**.
 4.  Gunakan nilai contoh tersebut untuk menguji model (misalnya: Masukkan nilai skenario "Macet Total" ke form utama untuk melihat hasil indikator Merah).
 
-## ☁️ Deployment
 
-Aplikasi ini siap di-deploy ke platform PaaS seperti Render, Railway, atau Heroku.
-
-1.  Pastikan file `requirements.txt` dan `Procfile` sudah ada.
-2.  Push kode ke repository GitHub Anda.
-3.  Hubungkan repository ke layanan hosting pilihan Anda.
-4.  Layanan akan mendeteksi aplikasi Python dan menjalankannya secara otomatis.
 
 ---
 
