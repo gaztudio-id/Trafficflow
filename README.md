@@ -1,4 +1,4 @@
-# 🚦 TrafficFlow: Optimasi Transportasi Perkotaan dengan AI
+# TrafficFlow: Optimasi Transportasi Perkotaan dengan AI
 
 ### Sistem Analisis Beban Lalu Lintas & Prediksi Kepadatan Real-Time
 
@@ -126,6 +126,6 @@ Untuk hasil prediksi yang akurat, pengguna disarankan memahami variabel input:
 ---
 
 **Kredit**
+Dibuat untuk Proyek Machine Learning
 
-Dibuat untuk Proyek Optimasi Alur Lalu Lintas
 GAZ 2025 - *Data-driven decisions for better urban mobility.*
