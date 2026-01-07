@@ -1,4 +1,4 @@
-# 🚦 TrafficFlow: Optimasi Transportasi Perkotaan dengan AI
+# TrafficFlow: Optimasi Transportasi Perkotaan dengan AI
 
 ### Sistem Analisis Beban Lalu Lintas & Prediksi Kepadatan Real-Time
 
